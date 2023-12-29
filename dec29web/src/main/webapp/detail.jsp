@@ -47,7 +47,10 @@
 		}
 		function del(no) {
 			if (confirm("정말 삭제할거가?")) {
-				location.href = "./delete.jsp?no="+no;
+				location.href = "./delete?no="+no;
+				// .jsp 빼면 서블릿이다~
+			} else {
+				alert("그래 잘 생각했어");
 			}
 		}
 	</script>

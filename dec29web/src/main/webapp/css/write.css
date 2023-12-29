@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+input{
+	width : 100%;
+	height:30px;
+	background-color:yellow;
+}
+
+textarea {
+	width: 100%;
+	height:300px;
+	font-size:large;
+	margin: 5px 0px;
+	/* margin은 여백을 준다?
+	4개까지 작성 가능하며 순서대로 ↑ → ↓ ← 방향의 여백을 준다
+	2개만 적을 시 위-아래, 양 옆을 세트로 적용한다
+	
+	
+	*/
+}
+button{
+	width:100%;
+}
