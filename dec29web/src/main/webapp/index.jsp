@@ -102,6 +102,7 @@ tbody tr:hover {
 				<td class="w1"><%=map.get("board_no")%></td>
 				<td class="w5"><a
 					href="./detail.jsp?no= <%=map.get("board_no")%>"> <%=map.get("board_title")%>
+					<!-- 와.. 여기서 가져오는거였네 -->
 				</a></td>
 				<td class="w1"><%=map.get("board_write")%></td>
 				<td class="w2"><%=map.get("board_date")%></td>
