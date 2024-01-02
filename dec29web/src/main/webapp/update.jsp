@@ -1,13 +1,13 @@
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>글 수정</title>
 <!-- css 파일 하나를 불러와서 하게(?)  -->
-<link rel ="stylesheet" type="text/css" href="./css/write.css">
-
+<link rel="stylesheet" type="text/css" href="./css/write.css">
 <script type="text/javascript">
 	function check() {
 //		내용 입력 안하면 글 작성 못하게 막는 것
@@ -31,14 +31,21 @@
 </script>
 </head>
 <body>
-	<h1>글쓰기</h1>
+<%
+	Map<String, Object> detail = (Map<String, Object>) request.getAttribute("detail");
+%>
+	<h1>글 수정하기</h1>
+	<%=detail.get("board_no") %>
 	<!-- form : 글 제목, 글 내용-->
 	<!-- get방식이면 method = "get" or 공백/
 	post 방식이면 method = "post"  -->
-	<form action="./write" method = "post">
-		<input type="text" name="title" id="title">
-		<textarea name="content" class="content"></textarea>
+	<form action="./update" method = "post" >
+	<!-- input에는 꺽쇠 안에서 호출  -->
+		<input type="text" name="title" id="title" value="<%=detail.get("board_title") %>">
+	<!-- text area에는 꺽쇠 밖에서 호출.  -->
+		<textarea name="content" class="content"><%=detail.get("board_content") %></textarea>
 		<button type="submit" onclick = "return check()">글쓰기</button>
+		<input type="text" name="no" value = "<%=detail.get("board_no")%>">
 	</form>
 
 </body>

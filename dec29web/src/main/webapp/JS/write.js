@@ -2,11 +2,11 @@
  * 자바스크립트 파일입니다. 
  */
 
- function write(){
-	 if(confirm("you want it?")){
-		 alert("let's do it");
-		 location.href = "./write.jsp";
-	 } else {
-		 alert("okay. guy");
-	 }
- }
+function write1() {
+	if (confirm("진짜 쓸거야??")) {
+		alert("와... 그래.. 그렇게 해");
+		location.href = "./write.jsp";
+	} else {
+		alert("잘 생각해쓰");
+	}
+}

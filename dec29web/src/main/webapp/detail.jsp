@@ -25,13 +25,16 @@
 	%>
 	<!-- 삭제 이미지를 누르면 삭제되는 기능을 넣어보자  -->
 	<!-- a링크  -->
-	<a href="./delete.jsp?no=<%=detail.get("board_no")%>"> <img
+	
+<!-- 	<a href="./delete.jsp?no=<%=detail.get("board_no")%>"> <img
 		alt="삭제" src="./IMG/delete.png" title="버튼을 누르면 삭제합니둥">
 	</a>
-	<img onclick="del(<%=detail.get("board_no")%>)" alt="삭제" src="./IMG/delete.png"
+ -->	
+	<img onclick= "update()" alt = "수정" src="./IMG/edit.png" title = "버튼을 누르면 글을 수정합니다.">
+	<img onclick="del(<%=detail.get("board_no")%>)" alt="삭제" src="./IMG/delete.jpg"
 		title="버튼을 누르면 삭제합니둥">
 	<br> 제목 :	<%=detail.get("board_title")%>
-	<br> 작성자 : <%=detail.get("board_writer")%>
+	<br> 작성자 : <%=detail.get("board_write")%>
 	<br> 작성일 : <%=detail.get("board_date")%><br> 조회수 :<%=detail.get("board_count")%>
 	<hr>
 	<%=detail.get("board_content")%>
@@ -40,11 +43,14 @@
 	<!-- what 함수 사용  -->
 	<button onclick="what()">눌러봐요</button>
 	<script type="text/javascript">
+
+		
 		function what() {
 			for (var i = 0; i < 1; i++) {
 				alert("Hey");
 			}
 		}
+		
 		function del(no) {
 			if (confirm("정말 삭제할거가?")) {
 				location.href = "./delete?no="+no;
@@ -53,6 +59,22 @@
 				alert("그래 잘 생각했어");
 			}
 		}
+		
+		function update(){
+			var check = confirm("수정하시겠어요?");
+			if(check){
+				alert("글을 수정합니다.")
+				location.href="./update?no=<%=detail.get("board_no")%>";
+				//위 문장은 서버단에서
+				// 그 후 html/css/js단에서 처리
+				// 실행순서
+				//1. 자바 코드 먼저 실행 = 서버단
+				//2. html/css/js 실행 = 클라이언트단에서 처리
+			}
+			
+		}
+		
+		
 	</script>
 
 

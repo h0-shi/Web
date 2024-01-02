@@ -17,10 +17,12 @@
 <style type="text/css">
 /* 여기가 css 파티. 공부하자 */
 table {
-	width: 600px;
+	width: 800px;
 	border-collapse: collapse;
 }
-
+tr{
+	height : 30px;
+}
 td {
 	text-align: center;
 	border-bottom: #c0c0c0 1px solid;
@@ -35,14 +37,16 @@ tbody tr:hover {
 }
 
 .w2 {
-	width: 20%;
+	width: 15%;
 }
 
 .w5 {
-	width: 50%;
+	width: 55%;
 	text-align: left;
 }
 </style>
+<!-- script 실행 시 ./JS/write 로 이동 -->
+<script src="./JS/write.js" charset = "UTF-8"></script>
 </head>
 <body>
 	<h1>index</h1>
@@ -109,7 +113,7 @@ tbody tr:hover {
 		</tbody>
 	</table>
 	<button onclick="write1()">글쓰기</button>
-
+	
 	<script type="text/javascript">
 		function write1() {
 			if (confirm("진짜 쓸거야??")) {

@@ -9,10 +9,66 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mariadb.jdbc.export.Prepare;
+
 import com.poseidon.db.DBConnection;
 
 public class BoardDAO {
 	DBConnection dbCon = new DBConnection();
+	
+	public int update(String no, String title, String content) {
+		int result = 0;
+		Connection conn = dbCon.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE board SET board_title=?, board_content=? WHERE board_no=?";
+		String name = "박시호"; // 나중에 세션에서 받아올거야
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+//			pstmt.setString(3, name);
+			pstmt.setString(3, no);
+			
+//			이건 무슨 메서드지?
+//			얘도 쿼리를 실행하는 파트다..!
+			result = pstmt.executeUpdate(); // 결과를 숫자로 되돌려준다 => 변경된 레코드 수(?)
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null,pstmt,conn);
+		}
+		
+		
+		return result;
+	}
+//	글쓰기
+	public int write(String title, String content) {
+		int result = 0;
+		Connection conn = dbCon.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "INSERT INTO board (board_title,board_content,board_write) VALUES (?,?,?)";
+		String name = "박시호"; // 나중에 세션에서 받아올거야
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setString(3, name);
+			//pstmt.executeQuery();
+//			이건 무슨 메서드지?
+//			얘도 쿼리를 실행하는 파트다..!
+			result = pstmt.executeUpdate(); // 결과를 숫자로 되돌려준다 => 변경된 레코드 수(?)
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(null,pstmt,conn);
+		}
+		
+		
+		return result;
+	}
 
 	//삭제하기
 	public void delete(String no) {
@@ -94,7 +150,7 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT * FROM board";
+		String sql = "SELECT * FROM boardview";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
