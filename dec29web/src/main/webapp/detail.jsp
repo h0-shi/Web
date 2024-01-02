@@ -30,7 +30,8 @@
 		alt="삭제" src="./IMG/delete.png" title="버튼을 누르면 삭제합니둥">
 	</a>
  -->	
-	<img onclick= "update()" alt = "수정" src="./IMG/edit.png" title = "버튼을 누르면 글을 수정합니다.">
+	<img onclick= "update()" alt = "수정" src="./IMG/edit.png" 
+		title = "버튼을 누르면 글을 수정합니다.">
 	<img onclick="del(<%=detail.get("board_no")%>)" alt="삭제" src="./IMG/delete.jpg"
 		title="버튼을 누르면 삭제합니둥">
 	<br> 제목 :	<%=detail.get("board_title")%>
