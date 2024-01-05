@@ -1,12 +1,6 @@
-<%@page import="com.poseidon.dao.BoardDAO"%>
-<%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.DriverManager"%>
+<%@page import="com.poseidon.dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -49,7 +43,9 @@ tbody tr:hover {
 <script src="./JS/write.js" charset = "UTF-8"></script>
 </head>
 <body>
-	<h1>index</h1>
+<!-- 상단 메뉴 추가 -->
+<%@ include file = "./menu.jsp" %>
+	<h1>비밀 공간이에요</h1>
 	<!-- 게시판 내용 보기 -->
 	<!-- 이게 옛날 방식 - 오래걸리고 번거롭다. -->
 	<!-- jsp 한 파일에 접속 정보등 모든 정보를 담고 있음 -->
@@ -81,15 +77,15 @@ tbody tr:hover {
 	List<Map<String, Object>> list = dao.boardList();
 	%>
 	<!-- 	나온 결과 : -->
-
+ 	<img onclick="write1()" alt="글 작성" src ="./IMG/post.png" > 
 	<table border="1">
 		<thead>
 			<tr>
-				<td>번호</td>
+				<td>No.</td>
 				<td>제목</td>
 				<td>작성자</td>
-				<td>작성일자</td>
-				<td>조회수
+				<td>작성일</td>
+				<td>조회수</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -98,10 +94,10 @@ tbody tr:hover {
 			// jsp = java server page : html 코드 속에 java가 있다.
 			for (Map<String, Object> map : list) {
 			%>
-			<tr>
+ 			<tr>
 				<td class="w1"><%=map.get("board_no")%></td>
 				<td class="w5"><a
-					href="./detail.jsp?no= <%=map.get("board_no")%>"> <%=map.get("board_title")%>
+					href="./detail?no= <%=map.get("board_no")%>"> <%=map.get("board_title")%>
 					<!-- 와.. 여기서 가져오는거였네 -->
 				</a></td>
 				<td class="w1"><%=map.get("board_write")%></td>
@@ -113,24 +109,24 @@ tbody tr:hover {
 			%>
 		</tbody>
 	</table>
-	<button onclick="write1()">글쓰기</button>
+	<!-- <button onclick="write1()">글쓰기</button> -->
 	
 	<script type="text/javascript">
-		function write1() {
+		function write2() {
 			if (confirm("진짜 쓸거야??")) {
 				alert("와... 그래.. 그렇게 해");
 				location.href = "./write.jsp";
 			} else {
 				alert("잘 생각해쓰");
 			}
-		}
+		} 
 	</script>
 
-	연습
-	<a href="./test">여기</a>를 눌러주세요.
+	
+ 	<a href="./test">여기</a>를 눌러주세요.
 	<br> 연습
 	<a href="./main">여기</a>를 누르면 메인(근데 그런거 없음).
-
+ 
 	<!-- 	자바 코드를 여러 줄 쓸 때는 < % % >
 	자바의 값 하느를 출력 할 때에는 < %= % > -->
 

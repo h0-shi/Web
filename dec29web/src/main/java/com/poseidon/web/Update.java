@@ -52,7 +52,7 @@ public class Update extends HttpServlet {
 
 		if (result == 1) {
 //			페이지 이동
-			response.sendRedirect("./detail.jsp?no="+no);
+			response.sendRedirect("./detail?no="+no);
 		} else {
 			response.sendRedirect("./error.jsp");
 		}

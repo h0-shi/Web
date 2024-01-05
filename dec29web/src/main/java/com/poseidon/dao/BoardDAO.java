@@ -15,12 +15,12 @@ import com.poseidon.db.DBConnection;
 
 public class BoardDAO {
 	DBConnection dbCon = new DBConnection();
-	
+
 	public int update(String no, String title, String content) {
 		int result = 0;
 		Connection conn = dbCon.getConnection();
 		PreparedStatement pstmt = null;
-		
+
 		String sql = "UPDATE board SET board_title=?, board_content=? WHERE board_no=?";
 		String name = "박시호"; // 나중에 세션에서 받아올거야
 		try {
@@ -29,25 +29,25 @@ public class BoardDAO {
 			pstmt.setString(2, content);
 //			pstmt.setString(3, name);
 			pstmt.setString(3, no);
-			
+
 //			이건 무슨 메서드지?
 //			얘도 쿼리를 실행하는 파트다..!
 			result = pstmt.executeUpdate(); // 결과를 숫자로 되돌려준다 => 변경된 레코드 수(?)
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(null,pstmt,conn);
+			close(null, pstmt, conn);
 		}
-		
-		
+
 		return result;
 	}
+
 //	글쓰기
 	public int write(String title, String content) {
 		int result = 0;
 		Connection conn = dbCon.getConnection();
 		PreparedStatement pstmt = null;
-		
+
 		String sql = "INSERT INTO board (board_title,board_content,board_write) VALUES (?,?,?)";
 		String name = "박시호"; // 나중에 세션에서 받아올거야
 		try {
@@ -55,7 +55,7 @@ public class BoardDAO {
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
 			pstmt.setString(3, name);
-			//pstmt.executeQuery();
+			// pstmt.executeQuery();
 //			이건 무슨 메서드지?
 //			얘도 쿼리를 실행하는 파트다..!
 			result = pstmt.executeUpdate(); // 결과를 숫자로 되돌려준다 => 변경된 레코드 수(?)
@@ -63,20 +63,19 @@ public class BoardDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			close(null,pstmt,conn);
+			close(null, pstmt, conn);
 		}
-		
-		
+
 		return result;
 	}
 
-	//삭제하기
+	// 삭제하기
 	public void delete(String no) {
 		Connection conn = dbCon.getConnection();
 		PreparedStatement pstmt = null;
-		
+
 		String sql = "DELETE FROM board WHERE board_no=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, no);
@@ -87,9 +86,9 @@ public class BoardDAO {
 		} finally {
 			close(null, pstmt, conn);
 		}
-		
+
 	}
-	
+
 	private void close(ResultSet rs, PreparedStatement pstmt, Connection con) {
 		try {
 			if (rs != null) {
@@ -116,7 +115,9 @@ public class BoardDAO {
 		ResultSet rs = null;
 
 		String sql = "SELECT * FROM board WHERE board_no=?";
+		count(no);
 
+//		조회수 +1 하는 메서드
 		try {
 			pstmt = con.prepareStatement(sql);
 //			상기sql문의 ?를 처리함
@@ -141,6 +142,24 @@ public class BoardDAO {
 		}
 
 		return detail;
+	}
+
+	// 조회수 올리기
+	private void count(String no) {
+		Connection conn = dbCon.getConnection();
+
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE board SET board_count = board_count+1 WHERE board_no=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(null, pstmt, conn);
+		}
+
 	}
 
 	// 게시판 보기
@@ -174,6 +193,5 @@ public class BoardDAO {
 
 		return list;
 	}
-	
 
 }

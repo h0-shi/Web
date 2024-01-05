@@ -14,25 +14,24 @@
 <title>톺아보기</title>
 </head>
 <body>
+<%@ include file = "./menu.jsp" %>
 	<h1>톺아본다</h1>
 	<%
-	String no = request.getParameter("no");
+//	String no = request.getParameter("no");
 
 	//DAO 호출
-	BoardDAO dao = new BoardDAO();
-	Map<String, Object> detail = dao.detail(no);
+//	BoardDAO dao = new BoardDAO();
+//	Map<String, Object> detail = dao.detail(no);
+    Map<String, Object> detail = (Map<String, Object>) request.getAttribute("detail");
 	//네트워크 상의 모든 data는 String으로 다닌다.
 	%>
 	<!-- 삭제 이미지를 누르면 삭제되는 기능을 넣어보자  -->
 	<!-- a링크  -->
 	
-<!-- 	<a href="./delete.jsp?no=<%=detail.get("board_no")%>"> <img
-		alt="삭제" src="./IMG/delete.png" title="버튼을 누르면 삭제합니둥">
-	</a>
- -->	
-	<img onclick= "update()" alt = "수정" src="./IMG/edit.png" 
+
+ 	<img onclick= "update()" alt = "수정" src="./IMG/update.png" 
 		title = "버튼을 누르면 글을 수정합니다.">
-	<img onclick="del(<%=detail.get("board_no")%>)" alt="삭제" src="./IMG/delete.jpg"
+	<img onclick="del(<%=detail.get("board_no")%>)" alt="삭제" src="./IMG/delete.png"
 		title="버튼을 누르면 삭제합니둥">
 	<br> 제목 :	<%=detail.get("board_title")%>
 	<br> 작성자 : <%=detail.get("board_write")%>

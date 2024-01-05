@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
 
-input{
-	width :100%;
+.title{
+	width :100px;
 	height:30px;
+}
+form .writeBtn{
+	width: 100%;
 }
